@@ -12,7 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
     <!-- firebase end ******************************************-->\
-     
+
     <link rel="stylesheet" href="style.css" />
     <script src="fb_setup.js"></script>
 
@@ -22,19 +22,22 @@
 <body>
 
     <div class="container">
-    <h1>Welcome</h1>
+        <h1>Welcome</h1>
 
-    <button onclick="fb_login()">Login with Google</button>
+        <button onclick="fb_login()">Login with Google</button>
 
-    <form id="UserDetails">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" name="name" required />
+       <form id="UserDetails">
 
-      <label for="age">Age:</label>
-      <input type="text" id="favoriteFruit" name="favoriteFruit" required />
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+
+        <label for="age">Age</label>
+        <input type="number" id="age" required>
+
     </form>
 
-    <script src="script.js"></script>
+        <button onclick="window.location.href='selection.html'">Next</button>
+        <script src="script.js"></script>
 
 </body>
 

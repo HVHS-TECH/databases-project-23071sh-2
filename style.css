@@ -1,54 +1,103 @@
-body {
-  background-color: white;
-  color: black;
-  font-family: Arial, sans-serif;
-  padding: 2rem;
+/* Applies to everything */
+* {
+    font-family: Arial, sans-serif;
 }
 
-.container {
-  max-width: 600px;
-  margin: auto;
-  background-color:black;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+html, body {
+    min-height: 100vh;
+    margin: 0;
+
+    background: linear-gradient(
+        135deg,
+        #0b1026,
+        #1e3a8a,
+        #4338ca,
+        #6d28d9
+    );
+
+    background-attachment: fixed;
 }
 
 h1 {
-  color: white;
-  font-size: 2.5rem;
-  margin-bottom: 0;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
 }
 
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #111827;
+
+    padding: 2rem;
+    border-radius: 15px;
+
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
+}
 
 label {
-  display: block;
-  margin-top: 1rem;
+    display: block;
+    margin-top: 1rem;
+    color: white;
 }
 
 input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.3rem;
+
+    border: none;
+    border-radius: 8px;
+
+    box-sizing: border-box;
 }
 
 button {
-  margin-top: 1.5rem;
-  padding: 0.7rem 1.2rem;
-  background-color:white ;
-  color:black;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+    margin-top: 1.5rem;
+    padding: 0.9rem 1.2rem;
+
+    background: linear-gradient(
+        135deg,
+        #3b82f6,
+        #8b5cf6
+    );
+
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
-  background-color: blackS;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.7);
 }
 
 #statusMessage {
-  margin-top: 1rem;
-  font-style: italic;
+    margin-top: 1rem;
+    font-style: italic;
+    color: white;
+}
+
+.grid-items {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.grid-items button {
+    width: 250px;
+    height: 150px;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    border-radius: 15px;
 }
