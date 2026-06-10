@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Games</title>
+    <title>Welcome</title>
 
-    <style>
-        body{
-            text-align:center;
-            font-family:Arial;
-            background-color:white;
-            color:black;
-        }
+    <!-- firebase start ****************************************-->
+    <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+    <!-- firebase end ******************************************-->\
+     
+    <link rel="stylesheet" href="style.css" />
+    <script src="fb_setup.js"></script>
 
-        .button{
-            display:inline-block;
-            padding:20px 40px;
-            margin:20px;
-            background-color:lightblue;
-            color:Black;
-            text-decoration:none;
-            border-radius:10px;
-            font-size:24px;
-        }
-    </style>
+
 </head>
 
 <body>
 
-    <h1>Games</h1>
-    <a class="button" href="spacerunner.html">Space Runner</a>
-    <a class="button" href="geodash.html">GeoDash</a>
+    <div class="container">
+    <h1>Welcome</h1>
+
+    <button onclick="fb_login()">Login with Google</button>
+
+    <form id="UserDetails">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="age">Age:</label>
+      <input type="text" id="favoriteFruit" name="favoriteFruit" required />
+    </form>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
