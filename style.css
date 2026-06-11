@@ -1,19 +1,17 @@
-/* Applies to everything */
 * {
     font-family: Arial, sans-serif;
 }
 
-html, body {
+html,
+body {
     min-height: 100vh;
     margin: 0;
 
-    background: linear-gradient(
-        135deg,
-        #0b1026,
-        #1e3a8a,
-        #4338ca,
-        #6d28d9
-    );
+    background: linear-gradient(135deg,
+            #0b1026,
+            #1e3a8a,
+            #4338ca,
+            #6d28d9);
 
     background-attachment: fixed;
 }
@@ -21,6 +19,13 @@ html, body {
 h1 {
     font-size: 40px;
     text-align: center;
+    color: white;
+    margin-top: 40px;
+}
+
+h2 {
+    font-size: 20px;
+    text-align: left;
     color: white;
     margin-top: 40px;
 }
@@ -57,11 +62,9 @@ button {
     margin-top: 1.5rem;
     padding: 0.9rem 1.2rem;
 
-    background: linear-gradient(
-        135deg,
-        #3b82f6,
-        #8b5cf6
-    );
+    background: linear-gradient(135deg,
+            #3b82f6,
+            #8b5cf6);
 
     color: white;
     font-size: 16px;
@@ -100,4 +103,8 @@ button:hover {
     font-weight: bold;
 
     border-radius: 15px;
+}
+
+p {
+    color: white;
 }

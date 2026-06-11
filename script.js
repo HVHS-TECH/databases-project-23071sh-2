@@ -1,3 +1,5 @@
+var GLOBAL_user; //Google's user object
+
 //Set up a listener for the login state of the user
 function fb_login() {
     authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
@@ -25,4 +27,11 @@ function fb_popupLogin() {
         console.log("User has logged in")
     });
 }
+
+function writeForm() {
+   
+}
+
+
+
 
