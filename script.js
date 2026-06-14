@@ -29,7 +29,24 @@ function fb_popupLogin() {
 }
 
 function writeForm() {
-   
+    if (!GLOBAL_user) {
+        alert("Please log in first.");
+        return;
+    }
+    // Get the form data
+    const name = document.getElementById("name").value;
+    const age = document.getElementById("age").value;
+
+    // Console log
+    console.log("Name: " + name);
+    console.log("Age: " + age);
+
+    // Save to Firebase
+    firebase.database().ref("userDetail/" + GLOBAL_user.uid).set({
+        a_name: name,
+        age: age
+    });
+
 }
 
 
