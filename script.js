@@ -16,6 +16,7 @@ function fb_handleLogin(_user) {
         console.log("user is Not logged in - Starting the popup process")
         fb_popupLogin();
     }
+
 }
 
 //Run the google login popup
