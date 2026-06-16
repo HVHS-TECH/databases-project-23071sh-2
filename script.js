@@ -47,7 +47,6 @@ function writeForm() {
         a_name: name,
         age: age
     });
-
 }
 
 
