@@ -29,24 +29,65 @@ function fb_popupLogin() {
     });
 }
 
+const nameInput = document.getElementById("name");
+const ageInput = document.getElementById("age");
+
 function writeForm() {
+
+    console.log("Writing form data");
+
     if (!GLOBAL_user) {
-        alert("Please log in first.");
+        alert("Please log in first");
         return;
     }
-    // Get the form data
-    const name = document.getElementById("name").value;
-    const age = document.getElementById("age").value;
 
-    // Console log
-    console.log("Name: " + name);
-    console.log("Age: " + age);
+    // Get the values from the form
+    const name = nameInput.value;
+    const age = ageInput.value;
 
-    // Save to Firebase
-    firebase.database().ref("userDetail/" + GLOBAL_user.uid).set({
+    // Save to Firebase using the user's uid
+    firebase.database().ref('/userDetail/' + GLOBAL_user.uid).set({
         a_name: name,
         age: age
     });
+}
+
+function writeScore(gameName, score) {
+
+    if (!GLOBAL_user) {
+        console.log("no user has logged in");
+        return;
+    }
+    firebase.database().ref('/gameScores/' + gameName + '/' + GLOBAL_user.uid).set({ 
+        score: score,
+        playerName: GLOBAL_user.displayName
+    })
+    .then(() => {
+        console.log("Score saved");
+    })
+}
+
+function readForm() {
+    console.log("Reading form data");
+
+    firebase.database().ref('/userDetail/' + GLOBAL_user.uid)
+        .once('value', displayForm, fb_readError);
+}
+
+function displayForm(snapshot) {
+
+    let dbData = snapshot.val();
+
+    console.log(dbData.name);
+    console.log(dbData.age);
+
+    HTML_OUTPUT.innerHTML =
+        dbData.name + " is " + dbData.age + " years old";
+}
+
+function fb_readError(error) {
+    console.log("Read Error");
+    console.error(error);
 }
 
 

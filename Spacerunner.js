@@ -169,10 +169,16 @@ function drawGame() {
     let dy = abs(astronaut.position.y - obstacle.position.y);
 
   
-    if (dx < 70 && dy < 90) {
-      gameState = GAME_STATES.END;
-      stopAllMovement();
-    }
+if (dx < 70 && dy < 90) {
+
+    stopAllMovement();
+
+    gameState = GAME_STATES.END;
+
+    writeScore("spaceRunner", score);
+
+    return;
+}
   }
 
   // Infinite scrolling ground
@@ -265,3 +271,6 @@ function showSprites() {
   ground2.visible = true;
   for (let i = 0; i < obstacles.length; i++) obstacles[i].visible = true;
 }
+
+
+

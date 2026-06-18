@@ -9,48 +9,18 @@
 console.log("Running the game");
 
 
-// End game code
 function endGame(_player, _obstacle){
-    console.log("Game ended, you got "+score+" points.")
+
+    console.log("Game ended, you got " + score + " points.");
+
     screenSelector = "end";
+
     player.remove();
+
     obstacles.removeAll();
-    // Put your database writes here:
 
-
-
+    writeScore("geoDash", score);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const SCREEN_WIDTH = 400;
