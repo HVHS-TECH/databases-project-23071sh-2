@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>GeoDash</title>
+  <title>GeoDash</title>
 
   <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>  
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
   <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>  
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
 
@@ -18,9 +19,14 @@
 </head>
 
 <body>
-    <a href="selection.html">Back to Home</a>
-    <script src="index.html"></script>
-    <script src="script.js"></script>
-    <script src="Geodash.js"></script>
+  <a href="selection.html">Back to Home</a>
+  <script src="index.html"></script>
+  <script src="fb_setup.js"></script>
+  <script src="script.js"></script>
+  <script src="Geodash.js"></script>
+  <script>
+    fb_login();
+  </script>
 </body>
+
 </html>

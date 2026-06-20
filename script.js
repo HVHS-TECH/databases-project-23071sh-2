@@ -54,17 +54,31 @@ function writeForm() {
 
 function writeScore(gameName, score) {
 
-    if (!GLOBAL_user) {
-        console.log("no user has logged in");
-        return;
-    }
-    firebase.database().ref('/gameScores/' + gameName + '/' + GLOBAL_user.uid).set({ 
-        score: score,
-        playerName: GLOBAL_user.displayName
-    })
-    .then(() => {
-        console.log("Score saved");
-    })
+    firebase.auth().onAuthStateChanged(function(user) {
+
+        if (!user) {
+            console.log("No user logged in");
+            return;
+        }
+
+        firebase.database()
+        .ref('/gameScores/' + gameName + '/' + user.uid)
+        .set({
+            score: score,
+            playerName: user.displayName
+        })
+
+        .then(() => {
+            console.log("Score saved!");
+        })
+
+        .catch((error) => {
+            console.log("Error saving score");
+            console.error(error);
+        });
+
+    });
+
 }
 
 function readForm() {
