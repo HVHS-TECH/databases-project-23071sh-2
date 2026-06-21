@@ -7,16 +7,23 @@ function fb_login() {
 // Run when the login state of the user changes. 
 function fb_handleLogin(_user) {
     if (_user) {
-        console.log("User is logged in")
+        console.log("User is logged in");
         GLOBAL_user = _user;
         // Welcome message
-        document.getElementById("welcome").innerHTML =
-            "Welcome " + GLOBAL_user.displayName;
+        const welcomeText = document.getElementById("welcome");
+        if (welcomeText) {
+            welcomeText.innerHTML =
+                "Welcome " + GLOBAL_user.displayName;
+        }
+        // Hide login button
+        document.getElementById("loginSection").style.display = "none";
+        // Show form section
+        document.getElementById("formSection").style.display = "block";
     } else {
-        console.log("user is Not logged in - Starting the popup process")
-        fb_popupLogin();
-    }
 
+        console.log("User is Not logged in");
+
+    }
 }
 
 //Run the google login popup
@@ -44,17 +51,22 @@ function writeForm() {
     // Get the values from the form
     const name = nameInput.value;
     const age = ageInput.value;
-
+    
     // Save to Firebase using the user's uid
     firebase.database().ref('/userDetail/' + GLOBAL_user.uid).set({
         a_name: name,
         age: age
-    });
+    })
+    .then(() => {
+        console.log("Form saved");
+        // Show next button
+        document.getElementById("nextSection").style.display = "block";
+    })
 }
 
 function writeScore(gameName, score) {
 
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
 
         if (!user) {
             console.log("No user logged in");
@@ -62,20 +74,20 @@ function writeScore(gameName, score) {
         }
 
         firebase.database()
-        .ref('/gameScores/' + gameName + '/' + user.uid)
-        .set({
-            score: score,
-            playerName: user.displayName
-        })
+            .ref('/gameScores/' + gameName + '/' + user.uid)
+            .set({
+                score: score,
+                playerName: user.displayName
+            })
 
-        .then(() => {
-            console.log("Score saved!");
-        })
+            .then(() => {
+                console.log("Score saved!");
+            })
 
-        .catch((error) => {
-            console.log("Error saving score");
-            console.error(error);
-        });
+            .catch((error) => {
+                console.log("Error saving score");
+                console.error(error);
+            });
 
     });
 
