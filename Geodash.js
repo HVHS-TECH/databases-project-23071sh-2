@@ -10,15 +10,10 @@ console.log("Running the game");
 
 
 function endGame(_player, _obstacle){
-
     console.log("Game ended, you got " + score + " points.");
-
     screenSelector = "end";
-
     player.remove();
-
     obstacles.removeAll();
-
     writeScore("geoDash", score);
 }
 

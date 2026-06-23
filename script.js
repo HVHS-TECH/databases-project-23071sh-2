@@ -6,7 +6,6 @@ function fb_login() {
 }
 // Run when the login state of the user changes. 
 function fb_handleLogin(_user) {
-
     if (_user) {
         console.log("User is logged in");
         GLOBAL_user = _user;
@@ -21,9 +20,9 @@ function fb_handleLogin(_user) {
         // Show form section
         document.getElementById("formSection").style.display = "block";
     } else {
+
         console.log("User is Not logged in");
-        // OPEN GOOGLE LOGIN
-        fb_popupLogin();
+
     }
 }
 

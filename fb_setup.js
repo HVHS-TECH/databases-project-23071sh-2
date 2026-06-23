@@ -1,6 +1,6 @@
  
  //database writes here:
- const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCL5zHgKVWjbvLNWdaBoWsH3y6lSOVk-vw",
   authDomain: "comp-database-project-sonia.firebaseapp.com",
   databaseURL: "https://comp-database-project-sonia-default-rtdb.asia-southeast1.firebasedatabase.app",
