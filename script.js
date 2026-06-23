@@ -1,10 +1,14 @@
-var GLOBAL_user; //Google's user object
+var GLOBAL_user; // Google's user object
 
-//Set up a listener for the login state of the user
+// ==========================
+// START AUTH LISTENER
+// ==========================
 function fb_login() {
-    authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
+    firebase.auth().onAuthStateChanged(fb_handleLogin);
 }
-// Run when the login state of the user changes. 
+// ==========================
+// HANDLE LOGIN STATE
+// ==========================
 function fb_handleLogin(_user) {
     if (_user) {
         console.log("User is logged in");
@@ -14,26 +18,38 @@ function fb_handleLogin(_user) {
         if (welcomeText) {
             welcomeText.innerHTML =
                 "Welcome " + GLOBAL_user.displayName;
+
         }
-        // Hide login button
-        document.getElementById("loginSection").style.display = "none";
+
+        // Hide login section
+        const loginSection =
+            document.getElementById("loginSection");
+        if (loginSection) {
+            loginSection.style.display = "none";
+        }
         // Show form section
-        document.getElementById("formSection").style.display = "block";
+        const formSection =
+            document.getElementById("formSection");
+        if (formSection) {
+            formSection.style.display = "block";
+        }
     } else {
-
-        console.log("User is Not logged in");
-
+        console.log("User is NOT logged in");
+        GLOBAL_user = null;
     }
-}
 
-//Run the google login popup
+}
+// ==========================
+// GOOGLE LOGIN POPUP
+// ==========================
 function fb_popupLogin() {
     var provider = new firebase.auth.GoogleAuthProvider();
-
-    firebase.auth().signInWithPopup(provider).then((result) => {
-        GLOBAL_user = result.user; //Save the user object to a global variable
-        console.log("User has logged in")
-    });
+    firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+            GLOBAL_user = result.user;
+            console.log("User has logged in");
+        })
+      
 }
 
 const nameInput = document.getElementById("name");
