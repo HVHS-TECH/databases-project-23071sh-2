@@ -18,9 +18,7 @@ function fb_handleLogin(_user) {
         if (welcomeText) {
             welcomeText.innerHTML =
                 "Welcome " + GLOBAL_user.displayName;
-
         }
-
         // Hide login section
         const loginSection =
             document.getElementById("loginSection");
