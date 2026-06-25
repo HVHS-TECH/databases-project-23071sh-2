@@ -40,18 +40,12 @@ function fb_handleLogin(_user) {
 // ==========================
 // GOOGLE LOGIN POPUP
 // ==========================
-function fb_popupLogin() {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-        .then((result) => {
-            GLOBAL_user = result.user;
-            console.log("User has logged in");
-        })
-      
-}
-
-const nameInput = document.getElementById("name");
-const ageInput = document.getElementById("age");
+firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+        GLOBAL_user = result.user;
+        console.log("User has logged in");
+    })
+    .catch(fb_readError);
 
 function writeForm() {
 
@@ -62,22 +56,25 @@ function writeForm() {
         return;
     }
 
-    // Get the values from the form
+    const nameInput = document.getElementById("name");
+    const ageInput = document.getElementById("age");
+
+    // Get values
     const name = nameInput.value;
     const age = ageInput.value;
-    
-    // Save to Firebase using the user's uid
+
     firebase.database().ref('/userDetail/' + GLOBAL_user.uid).set({
         a_name: name,
         age: age
     })
+
     .then(() => {
         console.log("Form saved");
-        // Show next button
         document.getElementById("nextSection").style.display = "block";
     })
-}
 
+    .catch(fb_readError);
+}
 function writeScore(gameName, score) {
 
     firebase.auth().onAuthStateChanged(function (user) {
@@ -98,13 +95,8 @@ function writeScore(gameName, score) {
                 console.log("Score saved!");
             })
 
-            .catch((error) => {
-                console.log("Error saving score");
-                console.error(error);
+            .catch(fb_readError);
             });
-
-    });
-
 }
 
 function readForm() {
@@ -129,6 +121,11 @@ function fb_readError(error) {
     console.log("Read Error");
     console.error(error);
 }
+
+fb_login();
+
+
+
 
 
 
