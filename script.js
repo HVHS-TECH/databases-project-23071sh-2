@@ -83,26 +83,68 @@ function writeForm() {
 }
 function writeScore(gameName, score) {
 
-    firebase.auth().onAuthStateChanged(function (user) {
+    if (!GLOBAL_user) {
+        console.log("No user logged in");
+        return;
+    }
 
-        if (!user) {
-            console.log("No user logged in");
-            return;
-        }
+    firebase.database()
+        .ref('/gameScores/' + gameName + '/' + GLOBAL_user.uid)
+        .set({
 
-        firebase.database()
-            .ref('/gameScores/' + gameName + '/' + user.uid)
-            .set({
-                score: score,
-                playerName: user.displayName
-            })
+            uid: GLOBAL_user.uid,
+            score: score
 
-            .then(() => {
-                console.log("Score saved!");
-            })
+        })
 
-            .catch(fb_readError);
+        .then(() => {
+            console.log("Score saved!");
+        })
+
+        .catch(fb_readError);
+}
+
+function loadLeaderboard(gameName, elementID) {
+
+    firebase.database()
+        .ref('/gameScores/' + gameName)
+        .orderByChild("score")
+        .limitToLast(10)
+        .once('value')
+
+        .then((snapshot) => {
+
+            let leaderboardHTML =
+                "<h3>Top Scores</h3>";
+
+            let scores = [];
+
+            snapshot.forEach((childSnapshot) => {
+                scores.push(childSnapshot.val());
             });
+
+            for (let i = scores.length - 1; i >= 0; i--) {
+
+                leaderboardHTML +=
+
+                    '<div class="leaderboard-entry">' +
+
+                        '<span class="uid">' +
+                        scores[i].uid +
+                        '</span>' +
+
+                        '<span class="score">' +
+                        scores[i].score +
+                        '</span>' +
+
+                    '</div>';
+            }
+
+            document.getElementById(elementID).innerHTML =
+                leaderboardHTML;
+        })
+
+        .catch(fb_readError);
 }
 
 function readForm() {
@@ -129,6 +171,8 @@ function fb_readError(error) {
 }
 
 fb_login();
+loadLeaderboard("geoDash", "geoLeaderboard");
+loadLeaderboard("spaceRunner", "spaceLeaderboard");
 
 
 

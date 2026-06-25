@@ -108,3 +108,51 @@ button:hover {
 p {
     color: white;
 }
+/* ==========================
+   LEADERBOARD
+========================== */
+
+h4 {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+}
+
+#geoLeaderboard,
+#spaceLeaderboard {
+    margin-top: 20px;
+    background: #172238;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+#geoLeaderboard h3,
+#spaceLeaderboard h3 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.leaderboard-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.uid {
+    color: white;
+    font-size: 14px;
+}
+
+.score {
+    color: #8b5cf6;
+    font-weight: bold;
+    font-size: 16px;
+}
