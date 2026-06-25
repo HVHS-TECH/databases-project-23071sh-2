@@ -40,12 +40,17 @@ function fb_handleLogin(_user) {
 // ==========================
 // GOOGLE LOGIN POPUP
 // ==========================
-firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-        GLOBAL_user = result.user;
-        console.log("User has logged in");
-    })
-    .catch(fb_readError);
+
+function fb_popupLogin() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+            GLOBAL_user = result.user;
+            console.log("User has logged in");
+        })
+        .catch(fb_readError);
+}
+
 
 function writeForm() {
 
