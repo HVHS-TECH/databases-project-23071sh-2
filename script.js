@@ -42,6 +42,7 @@ function fb_handleLogin(_user) {
 // ==========================
 
 function fb_popupLogin() {
+    console.log("BUTTON WORKS");
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
         .then((result) => {
