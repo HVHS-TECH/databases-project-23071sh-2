@@ -74,12 +74,12 @@ function writeForm() {
         age: age
     })
 
-    .then(() => {
-        console.log("Form saved");
-        document.getElementById("nextSection").style.display = "block";
-    })
+        .then(() => {
+            console.log("Form saved");
+            document.getElementById("nextSection").style.display = "block";
+        })
 
-    .catch(fb_readError);
+        .catch(fb_readError);
 }
 function writeScore(gameName, score) {
 
@@ -89,9 +89,10 @@ function writeScore(gameName, score) {
     }
 
     firebase.database()
-        .ref('/gameScores/' + gameName + '/' + GLOBAL_user.uid)
+        .ref('/gameScores/' + gameName + '/' + GLOBAL_user.displayName)
         .set({
 
+            username: GLOBAL_user.displayName,
             uid: GLOBAL_user.uid,
             score: score
 
@@ -129,13 +130,13 @@ function loadLeaderboard(gameName, elementID) {
 
                     '<div class="leaderboard-entry">' +
 
-                        '<span class="uid">' +
-                        scores[i].uid +
-                        '</span>' +
+                    '<span class="uid">' +
+                    scores[i].username +
+                    '</span>' +
 
-                        '<span class="score">' +
-                        scores[i].score +
-                        '</span>' +
+                    '<span class="score">' +
+                    scores[i].score +
+                    '</span>' +
 
                     '</div>';
             }
