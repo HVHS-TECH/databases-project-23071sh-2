@@ -54,31 +54,62 @@ function fb_popupLogin() {
 
 
 function writeForm() {
-
     console.log("Writing form data");
-
     if (!GLOBAL_user) {
         alert("Please log in first");
         return;
     }
-
     const nameInput = document.getElementById("name");
     const ageInput = document.getElementById("age");
-
     // Get values
     const name = nameInput.value;
     const age = ageInput.value;
+    // ==========================
+    // VALIDATION
+    // ==========================
+    // Check if name is empty
+    if (name === "") {
+        alert("Please enter your name");
+        nameInput.focus();
+        return;
+    }
+    // Check if age is empty
+    if (age === "") {
+        alert("Please enter your age");
+        ageInput.focus();
+        return;
+    }
+    // Check if age is a number
+    if (isNaN(age)) {
+        alert("Age must be a number");
+        ageInput.focus();
+        return;
+    }
+    // Check if name is a number
+    if (!isNaN(name)) {
+        alert("Name must contain letters");
+        nameInput.focus();
+        return;
+    }
 
+    // Check valid age range
+    if (age < 16 || age > 100) {
+        alert("Please enter a valid age");
+        ageInput.focus();
+        return;
+    }
+
+    // ==========================
+    // SAVE TO FIREBASE
+    // ==========================
     firebase.database().ref('/userDetail/' + GLOBAL_user.uid).set({
-        a_name: name,
+        name: name,
         age: age
     })
-
         .then(() => {
             console.log("Form saved");
             document.getElementById("nextSection").style.display = "block";
         })
-
         .catch(fb_readError);
 }
 function writeScore(gameName, score) {
@@ -89,9 +120,9 @@ function writeScore(gameName, score) {
     firebase.database()
         .ref('/gameScores/' + gameName + '/' + GLOBAL_user.displayName)
         .set({
+            username: GLOBAL_user.displayName,
             uid: GLOBAL_user.uid,
             score: score
-
         })
         .then(() => {
             console.log("Score saved!");
@@ -115,12 +146,12 @@ function loadLeaderboard(gameName, elementID) {
             for (let i = scores.length - 1; i >= 0; i--) {
                 leaderboardHTML +=
                     '<div class="leaderboard-entry">' +
-                        '<span class="uid">' +
-                        scores[i].uid +
-                        '</span>' +
-                        '<span class="score">' +
-                        scores[i].score +
-                        '</span>' +
+                    '<span class="uid">' +
+                    scores[i].username +
+                    '</span>' +
+                    '<span class="score">' +
+                    scores[i].score +
+                    '</span>' +
                     '</div>';
             }
             document.getElementById(elementID).innerHTML =
