@@ -82,68 +82,50 @@ function writeForm() {
     .catch(fb_readError);
 }
 function writeScore(gameName, score) {
-
     if (!GLOBAL_user) {
         console.log("No user logged in");
         return;
     }
-
     firebase.database()
         .ref('/gameScores/' + gameName + '/' + GLOBAL_user.uid)
         .set({
-
             uid: GLOBAL_user.uid,
             score: score
 
         })
-
         .then(() => {
             console.log("Score saved!");
         })
-
         .catch(fb_readError);
 }
 
 function loadLeaderboard(gameName, elementID) {
-
     firebase.database()
         .ref('/gameScores/' + gameName)
         .orderByChild("score")
         .limitToLast(10)
         .once('value')
-
         .then((snapshot) => {
-
             let leaderboardHTML =
                 "<h3>Top Scores</h3>";
-
             let scores = [];
-
             snapshot.forEach((childSnapshot) => {
                 scores.push(childSnapshot.val());
             });
-
             for (let i = scores.length - 1; i >= 0; i--) {
-
                 leaderboardHTML +=
-
                     '<div class="leaderboard-entry">' +
-
                         '<span class="uid">' +
                         scores[i].uid +
                         '</span>' +
-
                         '<span class="score">' +
                         scores[i].score +
                         '</span>' +
-
                     '</div>';
             }
-
             document.getElementById(elementID).innerHTML =
                 leaderboardHTML;
         })
-
         .catch(fb_readError);
 }
 
