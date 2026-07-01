@@ -74,12 +74,12 @@ function writeForm() {
         age: age
     })
 
-    .then(() => {
-        console.log("Form saved");
-        document.getElementById("nextSection").style.display = "block";
-    })
+        .then(() => {
+            console.log("Form saved");
+            document.getElementById("nextSection").style.display = "block";
+        })
 
-    .catch(fb_readError);
+        .catch(fb_readError);
 }
 function writeScore(gameName, score) {
     if (!GLOBAL_user) {
@@ -87,7 +87,7 @@ function writeScore(gameName, score) {
         return;
     }
     firebase.database()
-        .ref('/gameScores/' + gameName + '/' + GLOBAL_user.uid)
+        .ref('/gameScores/' + gameName + '/' + GLOBAL_user.displayName)
         .set({
             uid: GLOBAL_user.uid,
             score: score
