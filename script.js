@@ -14,7 +14,8 @@ function fb_handleLogin(_user) {
         console.log("User is logged in");
         GLOBAL_user = _user;
         // Welcome message
-        const welcomeText = document.getElementById("welcome");
+        const welcomeText =
+            document.getElementById("welcome");
         if (welcomeText) {
             welcomeText.innerHTML =
                 "Welcome " + GLOBAL_user.displayName;
@@ -25,17 +26,42 @@ function fb_handleLogin(_user) {
         if (loginSection) {
             loginSection.style.display = "none";
         }
-        // Show form section
-        const formSection =
-            document.getElementById("formSection");
-        if (formSection) {
-            formSection.style.display = "block";
-        }
-    } else {
+        // CHECK IF USER DETAILS ALREADY EXIST
+        firebase.database()
+            .ref('/userDetail/' + GLOBAL_user.uid)
+            .once('value')
+            .then((snapshot) => {
+                // USER HAS ALREADY FILLED FORM
+                if (snapshot.exists()) {
+                    console.log("User details already exist");
+                    // Hide form
+                    document.getElementById("formSection")
+                        .style.display = "none";
+                    // Show next section
+                    document.getElementById("nextSection")
+                        .style.display = "block";
+                }
+                // NEW USER
+                else {
+                    console.log("New user");
+                    // Show form
+                    document.getElementById("formSection")
+                        .style.display = "block";
+                    // Hide next section
+                    document.getElementById("nextSection")
+                        .style.display = "none";
+                }
+            })
+
+            .catch(fb_readError);
+
+    }
+
+    else {
+
         console.log("User is NOT logged in");
         GLOBAL_user = null;
     }
-
 }
 // ==========================
 // GOOGLE LOGIN POPUP
